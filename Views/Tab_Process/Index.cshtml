@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_Process>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Process Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.procname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.procactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startjob)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startjobtime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.procwu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToBeArchived)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.helplink)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.procname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.procactive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startjob)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startjobtime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.procwu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToBeArchived)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.helplink)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.procid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.procid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.procid })
+        </td>
+    </tr>
+}
+
+</table>

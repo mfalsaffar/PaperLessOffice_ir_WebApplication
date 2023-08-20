@@ -1,0 +1,117 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_userProcess>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User Process Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Tab_userProcess", FormMethod.Get))
+{
+    <div class="form-group d-flex">
+        <input type="text" name="searchString" value="@ViewBag.CurrentFilter" class="form-control" placeholder="Search by Full Name" />
+        <button type="submit" class="btn btn-primary ml-2">Search</button>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.upactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_Process.procname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_users.username)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.upactive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tab_Process.procname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tab_users.username)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.upid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.upid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.upid })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@*@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_userProcess>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>User Process Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    @using (Html.BeginForm("Index", "Tab_userProcess", FormMethod.Get))
+    {
+
+
+        <div class="form-group d-flex">
+            <input type="text" name="searchString" value="@ViewBag.CurrentFilter" class="form-control" />
+            <button type="submit" class="btn btn-primary ml-2">Search</button>
+        </div>
+    }
+
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Tab_Process.procname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tab_users.username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.upactive)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tab_Process.procname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tab_users.username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.upactive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.upid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.upid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.upid })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+

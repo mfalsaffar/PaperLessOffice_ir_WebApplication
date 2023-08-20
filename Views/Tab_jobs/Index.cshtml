@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_jobs>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Jobs Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.jobname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.wuid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maxhours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefrenceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_JobType.JobTypeDesc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.jobname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.wuid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maxhours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RefrenceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ref_JobType.JobTypeDesc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.jobid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.jobid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.jobid })
+        </td>
+    </tr>
+}
+
+</table>

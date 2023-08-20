@@ -1,0 +1,51 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_UserJob>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>User Job Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ujActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.onlyLate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_jobs.jobname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_users.username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ujActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.onlyLate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_jobs.jobname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_users.username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ujid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ujid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ujid })
+        </td>
+    </tr>
+}
+
+</table>

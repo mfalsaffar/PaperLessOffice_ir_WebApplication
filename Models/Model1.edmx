@@ -1,0 +1,1523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PaperLessOffice_irModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ref_JobType">
+          <Key>
+            <PropertyRef Name="JobType_id" />
+          </Key>
+          <Property Name="JobType_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTypeDesc" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ref_wfStatus">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wfstatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="wfsactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tab_jobs">
+          <Key>
+            <PropertyRef Name="jobid" />
+          </Key>
+          <Property Name="jobid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobname" Type="nvarchar" MaxLength="50" />
+          <Property Name="wuid" Type="bigint" />
+          <Property Name="active" Type="bit" />
+          <Property Name="maxhours" Type="int" />
+          <Property Name="jobType" Type="int" />
+          <Property Name="RefrenceId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tab_Options">
+          <Key>
+            <PropertyRef Name="optionid" />
+          </Key>
+          <Property Name="optionid" Type="bigint" Nullable="false" />
+          <Property Name="OptName" Type="nvarchar" MaxLength="150" />
+          <Property Name="Option_Type" Type="int" />
+          <Property Name="Query_id" Type="int" />
+          <Property Name="Procedure_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Procedure_Param" Type="nvarchar" MaxLength="150" />
+          <Property Name="pjid" Type="bigint" />
+          <Property Name="procid" Type="bigint" />
+          <Property Name="jobid" Type="bigint" />
+          <Property Name="nextjob" Type="bigint" />
+          <Property Name="optactive" Type="bit" />
+          <Property Name="nxtstatus" Type="int" />
+          <Property Name="nxtmaxtime" Type="bigint" />
+          <Property Name="WCF_id" Type="bigint" />
+          <Property Name="WCF_method" Type="bigint" />
+          <Property Name="WCF_Param" Type="nvarchar" MaxLength="1500" />
+          <Property Name="CallFunction" Type="nvarchar" MaxLength="50" />
+          <Property Name="FunctionParamList" Type="nvarchar" MaxLength="150" />
+          <Property Name="AutomaticOpt" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PaperLessOffice_ir.dbo.tab_Orgmapp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tab_Orgmapp">
+          <Key>
+            <PropertyRef Name="unit_code" />
+            <PropertyRef Name="parent_code" />
+          </Key>
+          <Property Name="unit_code" Type="decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="parent_code" Type="decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="INSERT_DATE" Type="datetime" />
+          <Property Name="unit_level" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="unit_type" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="parent_level" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="parent_type" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="active" Type="decimal" Precision="1" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PaperLessOffice_ir.dbo.tab_Orgstruct' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tab_Orgstruct">
+          <Key>
+            <PropertyRef Name="unit_code" />
+          </Key>
+          <Property Name="unit_code" Type="decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="parent_unit" Type="decimal" Precision="11" Scale="0" />
+          <Property Name="unit_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="unit_level" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="unit_type" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="unit_discode" Type="decimal" Precision="11" Scale="0" />
+          <Property Name="tender_master" Type="int" />
+        </EntityType>
+        <EntityType Name="Tab_Process">
+          <Key>
+            <PropertyRef Name="procid" />
+          </Key>
+          <Property Name="procid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="procname" Type="nvarchar" MaxLength="50" />
+          <Property Name="procactive" Type="bit" />
+          <Property Name="startjob" Type="bigint" />
+          <Property Name="ProcType" Type="int" />
+          <Property Name="startjobtime" Type="bigint" />
+          <Property Name="procwu" Type="bigint" />
+          <Property Name="ToBeArchived" Type="bit" />
+          <Property Name="helplink" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Tab_Template">
+          <Key>
+            <PropertyRef Name="template_id" />
+          </Key>
+          <Property Name="template_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Procid" Type="bigint" />
+          <Property Name="tempname" Type="nvarchar" MaxLength="50" />
+          <Property Name="tempURL" Type="nvarchar" MaxLength="1500" />
+          <Property Name="temppath" Type="nvarchar" MaxLength="1500" />
+          <Property Name="tempactive" Type="bit" />
+          <Property Name="version" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tab_UserJob">
+          <Key>
+            <PropertyRef Name="ujid" />
+          </Key>
+          <Property Name="ujid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="bigint" Nullable="false" />
+          <Property Name="jobid" Type="bigint" Nullable="false" />
+          <Property Name="ujActive" Type="bit" />
+          <Property Name="onlyLate" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tab_userProcess">
+          <Key>
+            <PropertyRef Name="upid" />
+          </Key>
+          <Property Name="upid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="bigint" />
+          <Property Name="procid" Type="bigint" />
+          <Property Name="upactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tab_users">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="bigint" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="wu" Type="bigint" />
+          <Property Name="position" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="inbox" Type="bigint" />
+          <Property Name="reportTo" Type="bigint" />
+          <Property Name="viewWU" Type="bigint" />
+          <Property Name="email" Type="nchar" MaxLength="50" />
+          <Property Name="mobile" Type="nchar" MaxLength="13" />
+          <Property Name="cid" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="location" Type="nchar" MaxLength="50" />
+          <Property Name="fpid" Type="int" />
+        </EntityType>
+        <EntityType Name="Tab_wfTransactions">
+          <Key>
+            <PropertyRef Name="wftid" />
+          </Key>
+          <Property Name="wftid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wfid" Type="bigint" />
+          <Property Name="transdate" Type="datetime" />
+          <Property Name="optionselected" Type="bigint" />
+          <Property Name="note" Type="nvarchar" MaxLength="1000" />
+          <Property Name="userid" Type="bigint" />
+          <Property Name="VerDoc" Type="nvarchar" MaxLength="1500" />
+        </EntityType>
+        <EntityType Name="Tab_workflow">
+          <Key>
+            <PropertyRef Name="wfid" />
+          </Key>
+          <Property Name="wfid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="bigint" />
+          <Property Name="procid" Type="bigint" />
+          <Property Name="template_id" Type="bigint" />
+          <Property Name="InitialJob" Type="bigint" />
+          <Property Name="doc" Type="nvarchar" MaxLength="1500" />
+          <Property Name="wfstatusCode" Type="int" />
+          <Property Name="wfcurrentjob" Type="bigint" />
+          <Property Name="lastOption" Type="bigint" />
+          <Property Name="isopen" Type="bit" />
+          <Property Name="timeJobStart" Type="datetime" />
+          <Property Name="alarmtime" Type="datetime" />
+          <Property Name="viewed" Type="bit" />
+          <Property Name="processStartTime" Type="smalldatetime" />
+          <Property Name="processEndTime" Type="smalldatetime" />
+          <Property Name="tokenUID" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_Tab_jobs_Ref_JobType">
+          <End Role="Ref_JobType" Type="Self.Ref_JobType" Multiplicity="0..1" />
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_JobType">
+              <PropertyRef Name="JobType_id" />
+            </Principal>
+            <Dependent Role="Tab_jobs">
+              <PropertyRef Name="jobType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Ref_wfStatus">
+          <End Role="Ref_wfStatus" Type="Self.Ref_wfStatus" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_wfStatus">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="nxtstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Tab_jobs">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Tab_jobs1">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="nextjob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_Template_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="Tab_Template" Type="Self.Tab_Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="Tab_Template">
+              <PropertyRef Name="Procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_UserJob_Tab_jobs">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="1" />
+          <End Role="Tab_UserJob" Type="Self.Tab_UserJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="Tab_UserJob">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_UserJob_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="1" />
+          <End Role="Tab_UserJob" Type="Self.Tab_UserJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_UserJob">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_userProcess_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="Tab_userProcess" Type="Self.Tab_userProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="Tab_userProcess">
+              <PropertyRef Name="procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_userProcess_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="0..1" />
+          <End Role="Tab_userProcess" Type="Self.Tab_userProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_userProcess">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_wfTransactions_Tab_Options">
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="0..1" />
+          <End Role="Tab_wfTransactions" Type="Self.Tab_wfTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tab_Options">
+              <PropertyRef Name="optionid" />
+            </Principal>
+            <Dependent Role="Tab_wfTransactions">
+              <PropertyRef Name="optionselected" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_wfTransactions_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="0..1" />
+          <End Role="Tab_wfTransactions" Type="Self.Tab_wfTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_wfTransactions">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_wfTransactions_Tab_workflow">
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="0..1" />
+          <End Role="Tab_wfTransactions" Type="Self.Tab_wfTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_workflow">
+              <PropertyRef Name="wfid" />
+            </Principal>
+            <Dependent Role="Tab_wfTransactions">
+              <PropertyRef Name="wfid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Ref_wfStatus">
+          <End Role="Ref_wfStatus" Type="Self.Ref_wfStatus" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_wfStatus">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="wfstatusCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_jobs">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="wfcurrentjob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_tab_Options">
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tab_Options">
+              <PropertyRef Name="optionid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="lastOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_Template">
+          <End Role="Tab_Template" Type="Self.Tab_Template" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Template">
+              <PropertyRef Name="template_id" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="template_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="EmpOptions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="procid" Type="bigint" Mode="In" />
+          <Parameter Name="jobid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Get_WfHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="wfid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetOptionList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="procid" Type="bigint" Mode="In" />
+          <Parameter Name="jobid" Type="bigint" Mode="In" />
+          <Parameter Name="wfid" Type="bigint" Mode="In" />
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+          <Parameter Name="wfStatusCode" Type="bigint" Mode="In" />
+          <Parameter Name="lastJobId" Type="bigint" Mode="In" />
+          <Parameter Name="LastOptid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Pro_ExecuteWf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="bigint" Mode="In" />
+          <Parameter Name="procid" Type="bigint" Mode="In" />
+          <Parameter Name="wfid" Type="bigint" Mode="In" />
+          <Parameter Name="doc" Type="nvarchar" Mode="In" />
+          <Parameter Name="note" Type="nvarchar" Mode="In" />
+          <Parameter Name="optionid" Type="bigint" Mode="In" />
+          <Parameter Name="sendto" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Pro_GetFinishedProc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Pro_GetLateWf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Pro_GetMyInprogressProc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Pro_GetMyJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PaperLessOffice_irModelStoreContainer">
+          <EntitySet Name="Ref_JobType" EntityType="Self.Ref_JobType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_wfStatus" EntityType="Self.Ref_wfStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_jobs" EntityType="Self.Tab_jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tab_Options" EntityType="Self.tab_Options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_Process" EntityType="Self.Tab_Process" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_Template" EntityType="Self.Tab_Template" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_UserJob" EntityType="Self.Tab_UserJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_userProcess" EntityType="Self.Tab_userProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_users" EntityType="Self.Tab_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_wfTransactions" EntityType="Self.Tab_wfTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tab_workflow" EntityType="Self.Tab_workflow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tab_Orgmapp" EntityType="Self.tab_Orgmapp" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tab_Orgmapp].[unit_code] AS [unit_code], 
+    [tab_Orgmapp].[parent_code] AS [parent_code], 
+    [tab_Orgmapp].[INSERT_DATE] AS [INSERT_DATE], 
+    [tab_Orgmapp].[unit_level] AS [unit_level], 
+    [tab_Orgmapp].[unit_type] AS [unit_type], 
+    [tab_Orgmapp].[parent_level] AS [parent_level], 
+    [tab_Orgmapp].[parent_type] AS [parent_type], 
+    [tab_Orgmapp].[active] AS [active]
+    FROM [dbo].[tab_Orgmapp] AS [tab_Orgmapp]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tab_Orgstruct" EntityType="Self.tab_Orgstruct" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tab_Orgstruct].[unit_code] AS [unit_code], 
+    [tab_Orgstruct].[parent_unit] AS [parent_unit], 
+    [tab_Orgstruct].[unit_name] AS [unit_name], 
+    [tab_Orgstruct].[unit_level] AS [unit_level], 
+    [tab_Orgstruct].[unit_type] AS [unit_type], 
+    [tab_Orgstruct].[unit_discode] AS [unit_discode], 
+    [tab_Orgstruct].[tender_master] AS [tender_master]
+    FROM [dbo].[tab_Orgstruct] AS [tab_Orgstruct]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Tab_jobs_Ref_JobType" Association="Self.FK_Tab_jobs_Ref_JobType">
+            <End Role="Ref_JobType" EntitySet="Ref_JobType" />
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Ref_wfStatus" Association="Self.FK_tab_Options_Ref_wfStatus">
+            <End Role="Ref_wfStatus" EntitySet="Ref_wfStatus" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Tab_jobs" Association="Self.FK_tab_Options_Tab_jobs">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Tab_jobs1" Association="Self.FK_tab_Options_Tab_jobs1">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Tab_Process" Association="Self.FK_tab_Options_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_Template_Tab_Process" Association="Self.FK_Tab_Template_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="Tab_Template" EntitySet="Tab_Template" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_UserJob_Tab_jobs" Association="Self.FK_Tab_UserJob_Tab_jobs">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="Tab_UserJob" EntitySet="Tab_UserJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_UserJob_Tab_users" Association="Self.FK_Tab_UserJob_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_UserJob" EntitySet="Tab_UserJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_userProcess_Tab_Process" Association="Self.FK_Tab_userProcess_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="Tab_userProcess" EntitySet="Tab_userProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_userProcess_Tab_users" Association="Self.FK_Tab_userProcess_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_userProcess" EntitySet="Tab_userProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_wfTransactions_Tab_Options" Association="Self.FK_Tab_wfTransactions_Tab_Options">
+            <End Role="tab_Options" EntitySet="tab_Options" />
+            <End Role="Tab_wfTransactions" EntitySet="Tab_wfTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_wfTransactions_Tab_users" Association="Self.FK_Tab_wfTransactions_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_wfTransactions" EntitySet="Tab_wfTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_wfTransactions_Tab_workflow" Association="Self.FK_Tab_wfTransactions_Tab_workflow">
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+            <End Role="Tab_wfTransactions" EntitySet="Tab_wfTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Ref_wfStatus" Association="Self.FK_Tab_workflow_Ref_wfStatus">
+            <End Role="Ref_wfStatus" EntitySet="Ref_wfStatus" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_jobs" Association="Self.FK_Tab_workflow_Tab_jobs">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_tab_Options" Association="Self.FK_Tab_workflow_tab_Options">
+            <End Role="tab_Options" EntitySet="tab_Options" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_Process" Association="Self.FK_Tab_workflow_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_Template" Association="Self.FK_Tab_workflow_Tab_Template">
+            <End Role="Tab_Template" EntitySet="Tab_Template" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_users" Association="Self.FK_Tab_workflow_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PaperLessOffice_irModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ref_JobType">
+          <Key>
+            <PropertyRef Name="JobType_id" />
+          </Key>
+          <Property Name="JobType_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tab_jobs" Relationship="Self.FK_Tab_jobs_Ref_JobType" FromRole="Ref_JobType" ToRole="Tab_jobs" />
+        </EntityType>
+        <EntityType Name="Ref_wfStatus">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wfstatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="wfsactive" Type="Boolean" />
+          <NavigationProperty Name="tab_Options" Relationship="Self.FK_tab_Options_Ref_wfStatus" FromRole="Ref_wfStatus" ToRole="tab_Options" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_workflow_Ref_wfStatus" FromRole="Ref_wfStatus" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="Tab_jobs">
+          <Key>
+            <PropertyRef Name="jobid" />
+          </Key>
+          <Property Name="jobid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="wuid" Type="Int64" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="maxhours" Type="Int32" />
+          <Property Name="jobType" Type="Int32" />
+          <Property Name="RefrenceId" Type="Int64" />
+          <NavigationProperty Name="Ref_JobType" Relationship="Self.FK_Tab_jobs_Ref_JobType" FromRole="Tab_jobs" ToRole="Ref_JobType" />
+          <NavigationProperty Name="tab_Options" Relationship="Self.FK_tab_Options_Tab_jobs" FromRole="Tab_jobs" ToRole="tab_Options" />
+          <NavigationProperty Name="tab_Options1" Relationship="Self.FK_tab_Options_Tab_jobs1" FromRole="Tab_jobs" ToRole="tab_Options" />
+          <NavigationProperty Name="Tab_UserJob" Relationship="Self.FK_Tab_UserJob_Tab_jobs" FromRole="Tab_jobs" ToRole="Tab_UserJob" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_workflow_Tab_jobs" FromRole="Tab_jobs" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="tab_Options">
+          <Key>
+            <PropertyRef Name="optionid" />
+          </Key>
+          <Property Name="optionid" Type="Int64" Nullable="false" />
+          <Property Name="OptName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Option_Type" Type="Int32" />
+          <Property Name="Query_id" Type="Int32" />
+          <Property Name="Procedure_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Procedure_Param" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="pjid" Type="Int64" />
+          <Property Name="procid" Type="Int64" />
+          <Property Name="jobid" Type="Int64" />
+          <Property Name="nextjob" Type="Int64" />
+          <Property Name="optactive" Type="Boolean" />
+          <Property Name="nxtstatus" Type="Int32" />
+          <Property Name="nxtmaxtime" Type="Int64" />
+          <Property Name="WCF_id" Type="Int64" />
+          <Property Name="WCF_method" Type="Int64" />
+          <Property Name="WCF_Param" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="CallFunction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FunctionParamList" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AutomaticOpt" Type="Boolean" />
+          <NavigationProperty Name="Ref_wfStatus" Relationship="Self.FK_tab_Options_Ref_wfStatus" FromRole="tab_Options" ToRole="Ref_wfStatus" />
+          <NavigationProperty Name="Tab_jobs" Relationship="Self.FK_tab_Options_Tab_jobs" FromRole="tab_Options" ToRole="Tab_jobs" />
+          <NavigationProperty Name="Tab_jobs1" Relationship="Self.FK_tab_Options_Tab_jobs1" FromRole="tab_Options" ToRole="Tab_jobs" />
+          <NavigationProperty Name="Tab_Process" Relationship="Self.FK_tab_Options_Tab_Process" FromRole="tab_Options" ToRole="Tab_Process" />
+          <NavigationProperty Name="Tab_wfTransactions" Relationship="Self.FK_Tab_wfTransactions_Tab_Options" FromRole="tab_Options" ToRole="Tab_wfTransactions" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_workflow_tab_Options" FromRole="tab_Options" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="Tab_Process">
+          <Key>
+            <PropertyRef Name="procid" />
+          </Key>
+          <Property Name="procid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="procname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="procactive" Type="Boolean" />
+          <Property Name="startjob" Type="Int64" />
+          <Property Name="ProcType" Type="Int32" />
+          <Property Name="startjobtime" Type="Int64" />
+          <Property Name="procwu" Type="Int64" />
+          <Property Name="ToBeArchived" Type="Boolean" />
+          <Property Name="helplink" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tab_Options" Relationship="Self.FK_tab_Options_Tab_Process" FromRole="Tab_Process" ToRole="tab_Options" />
+          <NavigationProperty Name="Tab_Template" Relationship="Self.FK_Tab_Template_Tab_Process" FromRole="Tab_Process" ToRole="Tab_Template" />
+          <NavigationProperty Name="Tab_userProcess" Relationship="Self.FK_Tab_userProcess_Tab_Process" FromRole="Tab_Process" ToRole="Tab_userProcess" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_workflow_Tab_Process" FromRole="Tab_Process" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="Tab_Template">
+          <Key>
+            <PropertyRef Name="template_id" />
+          </Key>
+          <Property Name="template_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Procid" Type="Int64" />
+          <Property Name="tempname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tempURL" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="temppath" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="tempactive" Type="Boolean" />
+          <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tab_Process" Relationship="Self.FK_Tab_Template_Tab_Process" FromRole="Tab_Template" ToRole="Tab_Process" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_workflow_Tab_Template" FromRole="Tab_Template" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="Tab_UserJob">
+          <Key>
+            <PropertyRef Name="ujid" />
+          </Key>
+          <Property Name="ujid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int64" Nullable="false" />
+          <Property Name="jobid" Type="Int64" Nullable="false" />
+          <Property Name="ujActive" Type="Boolean" />
+          <Property Name="onlyLate" Type="Boolean" />
+          <NavigationProperty Name="Tab_jobs" Relationship="Self.FK_Tab_UserJob_Tab_jobs" FromRole="Tab_UserJob" ToRole="Tab_jobs" />
+          <NavigationProperty Name="Tab_users" Relationship="Self.FK_Tab_UserJob_Tab_users" FromRole="Tab_UserJob" ToRole="Tab_users" />
+        </EntityType>
+        <EntityType Name="Tab_userProcess">
+          <Key>
+            <PropertyRef Name="upid" />
+          </Key>
+          <Property Name="upid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int64" />
+          <Property Name="procid" Type="Int64" />
+          <Property Name="upactive" Type="Boolean" />
+          <NavigationProperty Name="Tab_Process" Relationship="Self.FK_Tab_userProcess_Tab_Process" FromRole="Tab_userProcess" ToRole="Tab_Process" />
+          <NavigationProperty Name="Tab_users" Relationship="Self.FK_Tab_userProcess_Tab_users" FromRole="Tab_userProcess" ToRole="Tab_users" />
+        </EntityType>
+        <EntityType Name="Tab_users">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int64" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="wu" Type="Int64" />
+          <Property Name="position" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="inbox" Type="Int64" />
+          <Property Name="reportTo" Type="Int64" />
+          <Property Name="viewWU" Type="Int64" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="mobile" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="cid" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="fpid" Type="Int32" />
+          <NavigationProperty Name="Tab_UserJob" Relationship="Self.FK_Tab_UserJob_Tab_users" FromRole="Tab_users" ToRole="Tab_UserJob" />
+          <NavigationProperty Name="Tab_userProcess" Relationship="Self.FK_Tab_userProcess_Tab_users" FromRole="Tab_users" ToRole="Tab_userProcess" />
+          <NavigationProperty Name="Tab_wfTransactions" Relationship="Self.FK_Tab_wfTransactions_Tab_users" FromRole="Tab_users" ToRole="Tab_wfTransactions" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_workflow_Tab_users" FromRole="Tab_users" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="Tab_wfTransactions">
+          <Key>
+            <PropertyRef Name="wftid" />
+          </Key>
+          <Property Name="wftid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wfid" Type="Int64" />
+          <Property Name="transdate" Type="DateTime" Precision="3" />
+          <Property Name="optionselected" Type="Int64" />
+          <Property Name="note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="userid" Type="Int64" />
+          <Property Name="VerDoc" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tab_Options" Relationship="Self.FK_Tab_wfTransactions_Tab_Options" FromRole="Tab_wfTransactions" ToRole="tab_Options" />
+          <NavigationProperty Name="Tab_users" Relationship="Self.FK_Tab_wfTransactions_Tab_users" FromRole="Tab_wfTransactions" ToRole="Tab_users" />
+          <NavigationProperty Name="Tab_workflow" Relationship="Self.FK_Tab_wfTransactions_Tab_workflow" FromRole="Tab_wfTransactions" ToRole="Tab_workflow" />
+        </EntityType>
+        <EntityType Name="Tab_workflow">
+          <Key>
+            <PropertyRef Name="wfid" />
+          </Key>
+          <Property Name="wfid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int64" />
+          <Property Name="procid" Type="Int64" />
+          <Property Name="template_id" Type="Int64" />
+          <Property Name="InitialJob" Type="Int64" />
+          <Property Name="doc" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="wfstatusCode" Type="Int32" />
+          <Property Name="wfcurrentjob" Type="Int64" />
+          <Property Name="lastOption" Type="Int64" />
+          <Property Name="isopen" Type="Boolean" />
+          <Property Name="timeJobStart" Type="DateTime" Precision="3" />
+          <Property Name="alarmtime" Type="DateTime" Precision="3" />
+          <Property Name="viewed" Type="Boolean" />
+          <Property Name="processStartTime" Type="DateTime" Precision="0" />
+          <Property Name="processEndTime" Type="DateTime" Precision="0" />
+          <Property Name="tokenUID" Type="Guid" />
+          <NavigationProperty Name="Ref_wfStatus" Relationship="Self.FK_Tab_workflow_Ref_wfStatus" FromRole="Tab_workflow" ToRole="Ref_wfStatus" />
+          <NavigationProperty Name="Tab_jobs" Relationship="Self.FK_Tab_workflow_Tab_jobs" FromRole="Tab_workflow" ToRole="Tab_jobs" />
+          <NavigationProperty Name="tab_Options" Relationship="Self.FK_Tab_workflow_tab_Options" FromRole="Tab_workflow" ToRole="tab_Options" />
+          <NavigationProperty Name="Tab_Process" Relationship="Self.FK_Tab_workflow_Tab_Process" FromRole="Tab_workflow" ToRole="Tab_Process" />
+          <NavigationProperty Name="Tab_Template" Relationship="Self.FK_Tab_workflow_Tab_Template" FromRole="Tab_workflow" ToRole="Tab_Template" />
+          <NavigationProperty Name="Tab_users" Relationship="Self.FK_Tab_workflow_Tab_users" FromRole="Tab_workflow" ToRole="Tab_users" />
+          <NavigationProperty Name="Tab_wfTransactions" Relationship="Self.FK_Tab_wfTransactions_Tab_workflow" FromRole="Tab_workflow" ToRole="Tab_wfTransactions" />
+        </EntityType>
+        <EntityType Name="tab_Orgmapp">
+          <Key>
+            <PropertyRef Name="unit_code" />
+            <PropertyRef Name="parent_code" />
+          </Key>
+          <Property Name="unit_code" Type="Decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="parent_code" Type="Decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="INSERT_DATE" Type="DateTime" Precision="3" />
+          <Property Name="unit_level" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="unit_type" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="parent_level" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="parent_type" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="active" Type="Decimal" Precision="1" Scale="0" />
+        </EntityType>
+        <EntityType Name="tab_Orgstruct">
+          <Key>
+            <PropertyRef Name="unit_code" />
+          </Key>
+          <Property Name="unit_code" Type="Decimal" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="parent_unit" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="unit_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="unit_level" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="unit_type" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="unit_discode" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="tender_master" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Tab_jobs_Ref_JobType">
+          <End Role="Ref_JobType" Type="Self.Ref_JobType" Multiplicity="0..1" />
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_JobType">
+              <PropertyRef Name="JobType_id" />
+            </Principal>
+            <Dependent Role="Tab_jobs">
+              <PropertyRef Name="jobType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Ref_wfStatus">
+          <End Role="Ref_wfStatus" Type="Self.Ref_wfStatus" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_wfStatus">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="nxtstatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Ref_wfStatus">
+          <End Role="Ref_wfStatus" Type="Self.Ref_wfStatus" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_wfStatus">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="wfstatusCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Tab_jobs">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Tab_jobs1">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="nextjob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_UserJob_Tab_jobs">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="1" />
+          <End Role="Tab_UserJob" Type="Self.Tab_UserJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="Tab_UserJob">
+              <PropertyRef Name="jobid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_jobs">
+          <End Role="Tab_jobs" Type="Self.Tab_jobs" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_jobs">
+              <PropertyRef Name="jobid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="wfcurrentjob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tab_Options_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="tab_Options">
+              <PropertyRef Name="procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_wfTransactions_Tab_Options">
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="0..1" />
+          <End Role="Tab_wfTransactions" Type="Self.Tab_wfTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tab_Options">
+              <PropertyRef Name="optionid" />
+            </Principal>
+            <Dependent Role="Tab_wfTransactions">
+              <PropertyRef Name="optionselected" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_tab_Options">
+          <End Role="tab_Options" Type="Self.tab_Options" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tab_Options">
+              <PropertyRef Name="optionid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="lastOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_Template_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="Tab_Template" Type="Self.Tab_Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="Tab_Template">
+              <PropertyRef Name="Procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_userProcess_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="Tab_userProcess" Type="Self.Tab_userProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="Tab_userProcess">
+              <PropertyRef Name="procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_Process">
+          <End Role="Tab_Process" Type="Self.Tab_Process" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Process">
+              <PropertyRef Name="procid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="procid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_Template">
+          <End Role="Tab_Template" Type="Self.Tab_Template" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_Template">
+              <PropertyRef Name="template_id" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="template_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_UserJob_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="1" />
+          <End Role="Tab_UserJob" Type="Self.Tab_UserJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_UserJob">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_userProcess_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="0..1" />
+          <End Role="Tab_userProcess" Type="Self.Tab_userProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_userProcess">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_wfTransactions_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="0..1" />
+          <End Role="Tab_wfTransactions" Type="Self.Tab_wfTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_wfTransactions">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_workflow_Tab_users">
+          <End Role="Tab_users" Type="Self.Tab_users" Multiplicity="0..1" />
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_users">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Tab_workflow">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tab_wfTransactions_Tab_workflow">
+          <End Role="Tab_workflow" Type="Self.Tab_workflow" Multiplicity="0..1" />
+          <End Role="Tab_wfTransactions" Type="Self.Tab_wfTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tab_workflow">
+              <PropertyRef Name="wfid" />
+            </Principal>
+            <Dependent Role="Tab_wfTransactions">
+              <PropertyRef Name="wfid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PaperLessOffice_irEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ref_JobType" EntityType="Self.Ref_JobType" />
+          <EntitySet Name="Ref_wfStatus" EntityType="Self.Ref_wfStatus" />
+          <EntitySet Name="Tab_jobs" EntityType="Self.Tab_jobs" />
+          <EntitySet Name="tab_Options" EntityType="Self.tab_Options" />
+          <EntitySet Name="Tab_Process" EntityType="Self.Tab_Process" />
+          <EntitySet Name="Tab_Template" EntityType="Self.Tab_Template" />
+          <EntitySet Name="Tab_UserJob" EntityType="Self.Tab_UserJob" />
+          <EntitySet Name="Tab_userProcess" EntityType="Self.Tab_userProcess" />
+          <EntitySet Name="Tab_users" EntityType="Self.Tab_users" />
+          <EntitySet Name="Tab_wfTransactions" EntityType="Self.Tab_wfTransactions" />
+          <EntitySet Name="Tab_workflow" EntityType="Self.Tab_workflow" />
+          <EntitySet Name="tab_Orgmapp" EntityType="Self.tab_Orgmapp" />
+          <EntitySet Name="tab_Orgstruct" EntityType="Self.tab_Orgstruct" />
+          <AssociationSet Name="FK_Tab_jobs_Ref_JobType" Association="Self.FK_Tab_jobs_Ref_JobType">
+            <End Role="Ref_JobType" EntitySet="Ref_JobType" />
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Ref_wfStatus" Association="Self.FK_tab_Options_Ref_wfStatus">
+            <End Role="Ref_wfStatus" EntitySet="Ref_wfStatus" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Ref_wfStatus" Association="Self.FK_Tab_workflow_Ref_wfStatus">
+            <End Role="Ref_wfStatus" EntitySet="Ref_wfStatus" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Tab_jobs" Association="Self.FK_tab_Options_Tab_jobs">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Tab_jobs1" Association="Self.FK_tab_Options_Tab_jobs1">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_UserJob_Tab_jobs" Association="Self.FK_Tab_UserJob_Tab_jobs">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="Tab_UserJob" EntitySet="Tab_UserJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_jobs" Association="Self.FK_Tab_workflow_Tab_jobs">
+            <End Role="Tab_jobs" EntitySet="Tab_jobs" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tab_Options_Tab_Process" Association="Self.FK_tab_Options_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="tab_Options" EntitySet="tab_Options" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_wfTransactions_Tab_Options" Association="Self.FK_Tab_wfTransactions_Tab_Options">
+            <End Role="tab_Options" EntitySet="tab_Options" />
+            <End Role="Tab_wfTransactions" EntitySet="Tab_wfTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_tab_Options" Association="Self.FK_Tab_workflow_tab_Options">
+            <End Role="tab_Options" EntitySet="tab_Options" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_Template_Tab_Process" Association="Self.FK_Tab_Template_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="Tab_Template" EntitySet="Tab_Template" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_userProcess_Tab_Process" Association="Self.FK_Tab_userProcess_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="Tab_userProcess" EntitySet="Tab_userProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_Process" Association="Self.FK_Tab_workflow_Tab_Process">
+            <End Role="Tab_Process" EntitySet="Tab_Process" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_Template" Association="Self.FK_Tab_workflow_Tab_Template">
+            <End Role="Tab_Template" EntitySet="Tab_Template" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_UserJob_Tab_users" Association="Self.FK_Tab_UserJob_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_UserJob" EntitySet="Tab_UserJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_userProcess_Tab_users" Association="Self.FK_Tab_userProcess_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_userProcess" EntitySet="Tab_userProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_wfTransactions_Tab_users" Association="Self.FK_Tab_wfTransactions_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_wfTransactions" EntitySet="Tab_wfTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_workflow_Tab_users" Association="Self.FK_Tab_workflow_Tab_users">
+            <End Role="Tab_users" EntitySet="Tab_users" />
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tab_wfTransactions_Tab_workflow" Association="Self.FK_Tab_wfTransactions_Tab_workflow">
+            <End Role="Tab_workflow" EntitySet="Tab_workflow" />
+            <End Role="Tab_wfTransactions" EntitySet="Tab_wfTransactions" />
+          </AssociationSet>
+          <FunctionImport Name="EmpOptions" ReturnType="Collection(PaperLessOffice_irModel.EmpOptions_Result)">
+            <Parameter Name="procid" Mode="In" Type="Int64" />
+            <Parameter Name="jobid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Get_WfHistory" ReturnType="Collection(PaperLessOffice_irModel.Get_WfHistory_Result)">
+            <Parameter Name="wfid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetOptionList" ReturnType="Collection(PaperLessOffice_irModel.GetOptionList_Result)">
+            <Parameter Name="procid" Mode="In" Type="Int64" />
+            <Parameter Name="jobid" Mode="In" Type="Int64" />
+            <Parameter Name="wfid" Mode="In" Type="Int64" />
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+            <Parameter Name="wfStatusCode" Mode="In" Type="Int64" />
+            <Parameter Name="lastJobId" Mode="In" Type="Int64" />
+            <Parameter Name="LastOptid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Pro_ExecuteWf" ReturnType="Collection(PaperLessOffice_irModel.Pro_ExecuteWf_Result)">
+            <Parameter Name="uid" Mode="In" Type="Int64" />
+            <Parameter Name="procid" Mode="In" Type="Int64" />
+            <Parameter Name="wfid" Mode="In" Type="Int64" />
+            <Parameter Name="doc" Mode="In" Type="String" />
+            <Parameter Name="note" Mode="In" Type="String" />
+            <Parameter Name="optionid" Mode="In" Type="Int64" />
+            <Parameter Name="sendto" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Pro_GetFinishedProc" ReturnType="Collection(PaperLessOffice_irModel.Pro_GetFinishedProc_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Pro_GetLateWf" ReturnType="Collection(PaperLessOffice_irModel.Pro_GetLateWf_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Pro_GetMyInprogressProc" ReturnType="Collection(PaperLessOffice_irModel.Pro_GetMyInprogressProc_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="Pro_GetMyJob" ReturnType="Collection(PaperLessOffice_irModel.Pro_GetMyJob_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="EmpOptions_Result">
+          <Property Type="Int64" Name="optionid" Nullable="false" />
+          <Property Type="String" Name="OptName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Get_WfHistory_Result">
+          <Property Type="Int64" Name="wfid" Nullable="true" />
+          <Property Type="DateTime" Name="transdate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="jobname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetOptionList_Result">
+          <Property Type="Int64" Name="optionid" Nullable="false" />
+          <Property Type="String" Name="OptName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Pro_ExecuteWf_Result">
+          <Property Type="Int64" Name="wftid" Nullable="false" />
+          <Property Type="Int64" Name="wfid" Nullable="true" />
+          <Property Type="DateTime" Name="transdate" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="optionselected" Nullable="true" />
+          <Property Type="String" Name="note" Nullable="true" MaxLength="1000" />
+          <Property Type="Int64" Name="userid" Nullable="true" />
+          <Property Type="String" Name="VerDoc" Nullable="true" MaxLength="1500" />
+        </ComplexType>
+        <ComplexType Name="Pro_GetFinishedProc_Result">
+          <Property Type="Int64" Name="wfid" Nullable="false" />
+          <Property Type="Int64" Name="procid" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="procname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wfstatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="timeJobStart" Nullable="true" Precision="23" />
+          <Property Type="Int64" Name="userid" Nullable="false" />
+          <Property Type="Int64" Name="reportTo" Nullable="false" />
+          <Property Type="String" Name="doc" Nullable="true" MaxLength="1500" />
+        </ComplexType>
+        <ComplexType Name="Pro_GetLateWf_Result">
+          <Property Type="String" Name="fullname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="procname" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="wfid" Nullable="false" />
+          <Property Type="Int64" Name="procid" Nullable="true" />
+          <Property Type="String" Name="wfstatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="timeJobStart" Nullable="true" Precision="23" />
+          <Property Type="String" Name="doc" Nullable="true" MaxLength="1500" />
+          <Property Type="Int64" Name="wfcurrentjob" Nullable="true" />
+          <Property Type="String" Name="jobname" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="alarmtime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="wfstatusCode" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Pro_GetMyInprogressProc_Result">
+          <Property Type="Int64" Name="wfid" Nullable="false" />
+          <Property Type="Int64" Name="procid" Nullable="false" />
+          <Property Type="String" Name="procname" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="alarmtime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="jobname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wfstatus" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pro_GetMyJob_Result">
+          <Property Type="String" Name="fullname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="procname" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="wfid" Nullable="false" />
+          <Property Type="Int64" Name="procid" Nullable="true" />
+          <Property Type="String" Name="wfstatus" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="timeJobStart" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="alarmtime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="doc" Nullable="true" MaxLength="1500" />
+          <Property Type="Int64" Name="wfcurrentjob" Nullable="true" />
+          <Property Type="Int32" Name="wfstatusCode" Nullable="true" />
+          <Property Type="String" Name="jobname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PaperLessOffice_irModelStoreContainer" CdmEntityContainer="PaperLessOffice_irEntities">
+          <EntitySetMapping Name="Ref_JobType">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Ref_JobType">
+              <MappingFragment StoreEntitySet="Ref_JobType">
+                <ScalarProperty Name="JobType_id" ColumnName="JobType_id" />
+                <ScalarProperty Name="JobTypeDesc" ColumnName="JobTypeDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_wfStatus">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Ref_wfStatus">
+              <MappingFragment StoreEntitySet="Ref_wfStatus">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="wfstatus" ColumnName="wfstatus" />
+                <ScalarProperty Name="wfsactive" ColumnName="wfsactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_jobs">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_jobs">
+              <MappingFragment StoreEntitySet="Tab_jobs">
+                <ScalarProperty Name="jobid" ColumnName="jobid" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="wuid" ColumnName="wuid" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="maxhours" ColumnName="maxhours" />
+                <ScalarProperty Name="jobType" ColumnName="jobType" />
+                <ScalarProperty Name="RefrenceId" ColumnName="RefrenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tab_Options">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.tab_Options">
+              <MappingFragment StoreEntitySet="tab_Options">
+                <ScalarProperty Name="optionid" ColumnName="optionid" />
+                <ScalarProperty Name="OptName" ColumnName="OptName" />
+                <ScalarProperty Name="Option_Type" ColumnName="Option_Type" />
+                <ScalarProperty Name="Query_id" ColumnName="Query_id" />
+                <ScalarProperty Name="Procedure_name" ColumnName="Procedure_name" />
+                <ScalarProperty Name="Procedure_Param" ColumnName="Procedure_Param" />
+                <ScalarProperty Name="pjid" ColumnName="pjid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="jobid" ColumnName="jobid" />
+                <ScalarProperty Name="nextjob" ColumnName="nextjob" />
+                <ScalarProperty Name="optactive" ColumnName="optactive" />
+                <ScalarProperty Name="nxtstatus" ColumnName="nxtstatus" />
+                <ScalarProperty Name="nxtmaxtime" ColumnName="nxtmaxtime" />
+                <ScalarProperty Name="WCF_id" ColumnName="WCF_id" />
+                <ScalarProperty Name="WCF_method" ColumnName="WCF_method" />
+                <ScalarProperty Name="WCF_Param" ColumnName="WCF_Param" />
+                <ScalarProperty Name="CallFunction" ColumnName="CallFunction" />
+                <ScalarProperty Name="FunctionParamList" ColumnName="FunctionParamList" />
+                <ScalarProperty Name="AutomaticOpt" ColumnName="AutomaticOpt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_Process">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_Process">
+              <MappingFragment StoreEntitySet="Tab_Process">
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="procname" ColumnName="procname" />
+                <ScalarProperty Name="procactive" ColumnName="procactive" />
+                <ScalarProperty Name="startjob" ColumnName="startjob" />
+                <ScalarProperty Name="ProcType" ColumnName="ProcType" />
+                <ScalarProperty Name="startjobtime" ColumnName="startjobtime" />
+                <ScalarProperty Name="procwu" ColumnName="procwu" />
+                <ScalarProperty Name="ToBeArchived" ColumnName="ToBeArchived" />
+                <ScalarProperty Name="helplink" ColumnName="helplink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_Template">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_Template">
+              <MappingFragment StoreEntitySet="Tab_Template">
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="Procid" ColumnName="Procid" />
+                <ScalarProperty Name="tempname" ColumnName="tempname" />
+                <ScalarProperty Name="tempURL" ColumnName="tempURL" />
+                <ScalarProperty Name="temppath" ColumnName="temppath" />
+                <ScalarProperty Name="tempactive" ColumnName="tempactive" />
+                <ScalarProperty Name="version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_UserJob">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_UserJob">
+              <MappingFragment StoreEntitySet="Tab_UserJob">
+                <ScalarProperty Name="ujid" ColumnName="ujid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="jobid" ColumnName="jobid" />
+                <ScalarProperty Name="ujActive" ColumnName="ujActive" />
+                <ScalarProperty Name="onlyLate" ColumnName="onlyLate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_userProcess">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_userProcess">
+              <MappingFragment StoreEntitySet="Tab_userProcess">
+                <ScalarProperty Name="upid" ColumnName="upid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="upactive" ColumnName="upactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_users">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_users">
+              <MappingFragment StoreEntitySet="Tab_users">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="wu" ColumnName="wu" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="inbox" ColumnName="inbox" />
+                <ScalarProperty Name="reportTo" ColumnName="reportTo" />
+                <ScalarProperty Name="viewWU" ColumnName="viewWU" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="fpid" ColumnName="fpid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_wfTransactions">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_wfTransactions">
+              <MappingFragment StoreEntitySet="Tab_wfTransactions">
+                <ScalarProperty Name="wftid" ColumnName="wftid" />
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="transdate" ColumnName="transdate" />
+                <ScalarProperty Name="optionselected" ColumnName="optionselected" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="VerDoc" ColumnName="VerDoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tab_workflow">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.Tab_workflow">
+              <MappingFragment StoreEntitySet="Tab_workflow">
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="template_id" ColumnName="template_id" />
+                <ScalarProperty Name="InitialJob" ColumnName="InitialJob" />
+                <ScalarProperty Name="doc" ColumnName="doc" />
+                <ScalarProperty Name="wfstatusCode" ColumnName="wfstatusCode" />
+                <ScalarProperty Name="wfcurrentjob" ColumnName="wfcurrentjob" />
+                <ScalarProperty Name="lastOption" ColumnName="lastOption" />
+                <ScalarProperty Name="isopen" ColumnName="isopen" />
+                <ScalarProperty Name="timeJobStart" ColumnName="timeJobStart" />
+                <ScalarProperty Name="alarmtime" ColumnName="alarmtime" />
+                <ScalarProperty Name="viewed" ColumnName="viewed" />
+                <ScalarProperty Name="processStartTime" ColumnName="processStartTime" />
+                <ScalarProperty Name="processEndTime" ColumnName="processEndTime" />
+                <ScalarProperty Name="tokenUID" ColumnName="tokenUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tab_Orgmapp">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.tab_Orgmapp">
+              <MappingFragment StoreEntitySet="tab_Orgmapp">
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="parent_code" ColumnName="parent_code" />
+                <ScalarProperty Name="INSERT_DATE" ColumnName="INSERT_DATE" />
+                <ScalarProperty Name="unit_level" ColumnName="unit_level" />
+                <ScalarProperty Name="unit_type" ColumnName="unit_type" />
+                <ScalarProperty Name="parent_level" ColumnName="parent_level" />
+                <ScalarProperty Name="parent_type" ColumnName="parent_type" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tab_Orgstruct">
+            <EntityTypeMapping TypeName="PaperLessOffice_irModel.tab_Orgstruct">
+              <MappingFragment StoreEntitySet="tab_Orgstruct">
+                <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+                <ScalarProperty Name="parent_unit" ColumnName="parent_unit" />
+                <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+                <ScalarProperty Name="unit_level" ColumnName="unit_level" />
+                <ScalarProperty Name="unit_type" ColumnName="unit_type" />
+                <ScalarProperty Name="unit_discode" ColumnName="unit_discode" />
+                <ScalarProperty Name="tender_master" ColumnName="tender_master" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EmpOptions" FunctionName="PaperLessOffice_irModel.Store.EmpOptions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.EmpOptions_Result">
+                <ScalarProperty Name="optionid" ColumnName="optionid" />
+                <ScalarProperty Name="OptName" ColumnName="OptName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_WfHistory" FunctionName="PaperLessOffice_irModel.Store.Get_WfHistory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.Get_WfHistory_Result">
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="transdate" ColumnName="transdate" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOptionList" FunctionName="PaperLessOffice_irModel.Store.GetOptionList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.GetOptionList_Result">
+                <ScalarProperty Name="optionid" ColumnName="optionid" />
+                <ScalarProperty Name="OptName" ColumnName="OptName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pro_ExecuteWf" FunctionName="PaperLessOffice_irModel.Store.Pro_ExecuteWf">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.Pro_ExecuteWf_Result">
+                <ScalarProperty Name="wftid" ColumnName="wftid" />
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="transdate" ColumnName="transdate" />
+                <ScalarProperty Name="optionselected" ColumnName="optionselected" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="VerDoc" ColumnName="VerDoc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pro_GetFinishedProc" FunctionName="PaperLessOffice_irModel.Store.Pro_GetFinishedProc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.Pro_GetFinishedProc_Result">
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="procname" ColumnName="procname" />
+                <ScalarProperty Name="wfstatus" ColumnName="wfstatus" />
+                <ScalarProperty Name="timeJobStart" ColumnName="timeJobStart" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="reportTo" ColumnName="reportTo" />
+                <ScalarProperty Name="doc" ColumnName="doc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pro_GetLateWf" FunctionName="PaperLessOffice_irModel.Store.Pro_GetLateWf">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.Pro_GetLateWf_Result">
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="procname" ColumnName="procname" />
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="wfstatus" ColumnName="wfstatus" />
+                <ScalarProperty Name="timeJobStart" ColumnName="timeJobStart" />
+                <ScalarProperty Name="doc" ColumnName="doc" />
+                <ScalarProperty Name="wfcurrentjob" ColumnName="wfcurrentjob" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="alarmtime" ColumnName="alarmtime" />
+                <ScalarProperty Name="wfstatusCode" ColumnName="wfstatusCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pro_GetMyInprogressProc" FunctionName="PaperLessOffice_irModel.Store.Pro_GetMyInprogressProc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.Pro_GetMyInprogressProc_Result">
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="procname" ColumnName="procname" />
+                <ScalarProperty Name="alarmtime" ColumnName="alarmtime" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+                <ScalarProperty Name="wfstatus" ColumnName="wfstatus" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pro_GetMyJob" FunctionName="PaperLessOffice_irModel.Store.Pro_GetMyJob">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PaperLessOffice_irModel.Pro_GetMyJob_Result">
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="procname" ColumnName="procname" />
+                <ScalarProperty Name="wfid" ColumnName="wfid" />
+                <ScalarProperty Name="procid" ColumnName="procid" />
+                <ScalarProperty Name="wfstatus" ColumnName="wfstatus" />
+                <ScalarProperty Name="timeJobStart" ColumnName="timeJobStart" />
+                <ScalarProperty Name="alarmtime" ColumnName="alarmtime" />
+                <ScalarProperty Name="doc" ColumnName="doc" />
+                <ScalarProperty Name="wfcurrentjob" ColumnName="wfcurrentjob" />
+                <ScalarProperty Name="wfstatusCode" ColumnName="wfstatusCode" />
+                <ScalarProperty Name="jobname" ColumnName="jobname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

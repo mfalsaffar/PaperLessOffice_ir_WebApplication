@@ -1,0 +1,82 @@
+﻿@model PaperLessOffice_ir_WebApplication.Models.Tab_Process
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tab_Process</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.procname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.procname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.procactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.procactive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startjob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startjob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startjobtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startjobtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.procwu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.procwu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToBeArchived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToBeArchived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.helplink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.helplink)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.procid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

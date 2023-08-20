@@ -1,0 +1,72 @@
+﻿@model PaperLessOffice_ir_WebApplication.Models.Tab_Template
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tab_Template</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tempname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tempname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tempURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tempURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.temppath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.temppath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tempactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tempactive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_Process.procname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_Process.procname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

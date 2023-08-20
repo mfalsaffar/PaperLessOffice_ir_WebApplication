@@ -1,0 +1,56 @@
+﻿@model PaperLessOffice_ir_WebApplication.Models.Tab_UserJob
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Tab_UserJob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ujActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ujActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.onlyLate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.onlyLate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_jobs.jobname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_jobs.jobname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_users.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_users.username)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

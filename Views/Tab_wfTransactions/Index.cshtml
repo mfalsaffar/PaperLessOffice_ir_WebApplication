@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_wfTransactions>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Log Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.transdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VerDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tab_Options.OptName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_users.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_workflow.doc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.transdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VerDoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tab_Options.OptName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_users.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_workflow.doc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.wftid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.wftid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.wftid })
+        </td>
+    </tr>
+}
+
+</table>

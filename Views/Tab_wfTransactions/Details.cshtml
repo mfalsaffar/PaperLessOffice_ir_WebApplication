@@ -1,0 +1,66 @@
+﻿@model PaperLessOffice_ir_WebApplication.Models.Tab_wfTransactions
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tab_wfTransactions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.transdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VerDoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VerDoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tab_Options.OptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tab_Options.OptName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_users.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_users.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_workflow.doc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_workflow.doc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.wftid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

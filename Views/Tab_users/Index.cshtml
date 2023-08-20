@@ -1,0 +1,111 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pwd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.wu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inbox)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.reportTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.viewWU)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fpid)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pwd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.wu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inbox)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.reportTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.viewWU)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fpid)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.userid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.userid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.userid })
+        </td>
+    </tr>
+}
+
+</table>

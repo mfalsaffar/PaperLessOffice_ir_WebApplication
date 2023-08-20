@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.Tab_Template>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Template Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tempname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tempURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.temppath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tempactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_Process.procname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tempname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tempURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.temppath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tempactive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_Process.procname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.template_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.template_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.template_id })
+        </td>
+    </tr>
+}
+
+</table>

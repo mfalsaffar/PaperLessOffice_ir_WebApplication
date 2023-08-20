@@ -1,0 +1,66 @@
+﻿@model PaperLessOffice_ir_WebApplication.Models.Tab_jobs
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tab_jobs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.jobname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wuid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wuid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maxhours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maxhours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RefrenceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefrenceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_JobType.JobTypeDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ref_JobType.JobTypeDesc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.jobid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

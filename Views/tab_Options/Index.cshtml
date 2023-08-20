@@ -1,0 +1,136 @@
+﻿@model IEnumerable<PaperLessOffice_ir_WebApplication.Models.tab_Options>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Options Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OptName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Option_Type)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Query_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Procedure_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Procedure_Param)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pjid)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.optactive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nxtmaxtime)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.WCF_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WCF_method)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WCF_Param)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallFunction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FunctionParamList)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutomaticOpt)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Ref_wfStatus.wfstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_jobs.jobname)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Tab_jobs1.jobname)*@
+            Next Job
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tab_Process.procname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Option_Type)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Query_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Procedure_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Procedure_Param)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pjid)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.optactive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nxtmaxtime)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.WCF_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WCF_method)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WCF_Param)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CallFunction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FunctionParamList)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AutomaticOpt)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Ref_wfStatus.wfstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_jobs.jobname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_jobs1.jobname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tab_Process.procname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.optionid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.optionid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.optionid })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model PaperLessOffice_ir_WebApplication.Models.Tab_userProcess
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tab_userProcess</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.upactive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.upactive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_Process.procname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_Process.procname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tab_users.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tab_users.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.upid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
