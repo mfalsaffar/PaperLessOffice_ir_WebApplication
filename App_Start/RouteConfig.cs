@@ -16,8 +16,15 @@ namespace PaperLessOffice_ir_WebApplication
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional}
             );
+
+            routes.MapRoute(
+            name: "UPnew",
+            url: "UPnew/{action}/{id}",
+            defaults: new { controller = "UPnew", action = "ActiveUsers", id = UrlParameter.Optional }
+           );
+
         }
     }
 }

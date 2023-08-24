@@ -141,8 +141,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\MyJobController.cs" />
+    <Compile Include="ActiveUsersResponse.cs" />
+    <Compile Include="ActiveUsersRequest.cs" />
+    <Compile Include="Controllers\UserProcessNewController.cs" />
+    <Compile Include="ProGetMyJobResponse.cs" />
+    <Compile Include="ProGetMyJobRequest.cs" />
     <Compile Include="MyJobViewModel.cs" />
+    <Compile Include="Controllers\MyJobController.cs" />
+    <Compile Include="ProcessResponse.cs" />
+    <Compile Include="ProcessUserNotAllowedRequest.cs" />
+    <Compile Include="ProcessUserAllowedRequest.cs" />
+    <Compile Include="Controllers\UserProcessController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Tab_jobsController.cs" />
     <Compile Include="Controllers\tab_OptionsController.cs" />
@@ -191,9 +200,6 @@
     <Compile Include="Models\Pro_GetMyInprogressProc_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pro_GetMyJob_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Ref_JobType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -234,14 +240,19 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Process.cs" />
+    <Compile Include="ViewModels\UserProcesses.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\TransferList\jquery.transfer.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\icon_font\css\icon_font.css" />
+    <Content Include="Content\icon_font\font\iconfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model1.Context.tt">
@@ -263,6 +274,9 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\icon_font\font\iconfont.eot" />
+    <Content Include="Content\icon_font\font\iconfont.ttf" />
+    <Content Include="Content\icon_font\font\iconfont.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -274,6 +288,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\TransferList\jquery.transfer.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -328,10 +343,14 @@
     <Content Include="Views\Tab_Template\Details.cshtml" />
     <Content Include="Views\Tab_Template\Edit.cshtml" />
     <Content Include="Views\Tab_Template\Index.cshtml" />
-    <Content Include="Views\MyJobs\Index.cshtml" />
+    <Content Include="Views\UserProcess\ActiveUsers.cshtml" />
+    <Content Include="Views\MyJob\Index.cshtml" />
+    <Content Include="Views\UserProcess\UserProcesses.cshtml" />
+    <Content Include="Views\UPnew\ActiveUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\UserProcessNew\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

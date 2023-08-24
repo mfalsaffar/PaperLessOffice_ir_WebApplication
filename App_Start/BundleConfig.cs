@@ -20,10 +20,13 @@ namespace PaperLessOffice_ir_WebApplication
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/TransferList/jquery.transfer.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/icon_font/css/icon_font.css",
+                      "~/Content/TransferList/jquery.transfer.css",
                       "~/Content/site.css"));
         }
     }

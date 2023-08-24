@@ -155,14 +155,14 @@ namespace PaperLessOffice_ir_WebApplication.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pro_GetMyInprogressProc_Result>("Pro_GetMyInprogressProc", useridParameter);
         }
-    
-        public virtual ObjectResult<Pro_GetMyJob_Result> Pro_GetMyJob(Nullable<int> userid)
+
+        public virtual ObjectResult<ProGetMyJobResponse> Pro_GetMyJob(Nullable<int> userid)
         {
             var useridParameter = userid.HasValue ?
                 new ObjectParameter("userid", userid) :
                 new ObjectParameter("userid", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Pro_GetMyJob_Result>("Pro_GetMyJob", useridParameter);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProGetMyJobResponse>("Pro_GetMyJob", useridParameter);
         }
     }
 }

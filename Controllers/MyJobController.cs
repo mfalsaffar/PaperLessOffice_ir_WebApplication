@@ -11,9 +11,9 @@ namespace PaperLessOffice_ir_WebApplication.Controllers
     {
         public ActionResult Index(int userId)
         {
-            try                                         
+            try
             {
-                List<MyJobViewModel> jobs = new List<MyJobViewModel>();
+                List<ProGetMyJobResponse> jobs = new List<ProGetMyJobResponse>();
 
                 using (SqlConnection connection = new SqlConnection("DefaultConnection"))
                 {
@@ -21,19 +21,25 @@ namespace PaperLessOffice_ir_WebApplication.Controllers
                     using (SqlCommand command = new SqlCommand("Pro_GetMyJob", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("1", userId); // USER mahdi = 1
-                        //command.Parameters.AddWithValue("@userid", userId);
+                        command.Parameters.AddWithValue("@userid", userId);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                MyJobViewModel job = new MyJobViewModel
+                                ProGetMyJobResponse job = new ProGetMyJobResponse
                                 {
                                     Fullname = reader.GetString(reader.GetOrdinal("fullname")),
                                     ProcName = reader.GetString(reader.GetOrdinal("procname")),
-                                    WfId = reader.GetInt32(reader.GetOrdinal("wfid"))
-                                    // Add other properties as needed
+                                    WfId = reader.GetInt64(reader.GetOrdinal("wfid")),
+                                    ProcId = reader.GetInt64(reader.GetOrdinal("procid")),
+                                    WfStatus = reader.GetString(reader.GetOrdinal("wfstatus")),
+                                    TimeJobStart = reader.GetDateTime(reader.GetOrdinal("timeJobStart")),
+                                    AlarmTime = reader.GetDateTime(reader.GetOrdinal("alarmtime")),
+                                    Doc = reader.GetString(reader.GetOrdinal("doc")),
+                                    WfCurrentJob = reader.GetInt64(reader.GetOrdinal("wfcurrentjob")),
+                                    WfStatusCode = reader.GetInt32(reader.GetOrdinal("wfstatusCode")),
+                                    JobName = reader.GetString(reader.GetOrdinal("jobname"))
                                 };
                                 jobs.Add(job);
                             }
@@ -43,7 +49,7 @@ namespace PaperLessOffice_ir_WebApplication.Controllers
 
                 return View(jobs);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Handle exceptions if needed
                 return View("Error");

@@ -1,0 +1,103 @@
+﻿@model PaperLessOffice_ir_WebApplication.ViewModels.UserProcesses
+
+@{
+    ViewBag.Title = "Active Users";
+}
+
+<h2>Active Users</h2>
+@using (Html.BeginForm("ActiveUsers", "UPnew", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Select a user:")
+        @Html.DropDownListFor(m => m.UserId, (IEnumerable<SelectListItem>)ViewBag.UsersDropdown, "Select a user", new { @class = "form-control" })
+
+        <button type="submit" name="command" value="GetProcessUser">Display Processes</button>
+    </div>
+}
+
+@if (Model != null && Model.Processes != null)
+{
+    @*<div class="row">
+            <div class="col-md-6">
+                <h3>Processes Allowed</h3>
+                <ul class="process-list">
+                    @foreach (var process in Model.AllowedProcesses)
+                    {
+                        <li>@process.ProcName</li>
+                    }
+                    @if (Model.AllowedProcesses.Count == 0)
+                    {
+                        <li>No allowed processes available</li>
+                    }
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Processes Not Allowed</h3>
+                <ul class="process-list">
+                    @foreach (var process in Model.NotAllowedProcesses)
+                    {
+                        <li>@process.ProcName</li>
+                    }
+                    @if (Model.NotAllowedProcesses.Count == 0)
+                    {
+                        <li>No not allowed processes available</li>
+                    }
+                </ul>
+            </div>
+        </div>*@
+    <div class="row">
+        <div>
+            <div id="transfer1" class="transfer-demo"></div>
+        </div>
+    </div>
+    @section scripts {
+
+        <script type="text/javascript">
+        console.log(@Html.Raw(Json.Encode(Model.Processes)));
+        var dataArray1 = @Html.Raw(Json.Encode(Model.Processes).ToLower());
+
+    var settings1 = {
+        "dataArray": dataArray1,
+        "itemName": "title",
+        "valueName": "id",
+        "callable": function (items) {
+            console.dir(items)
+        }
+    };
+
+    $("#transfer1").transfer(settings1);</script>
+    }
+
+}
+
+<style>
+    .process-list {
+        list-style-type: none;
+        padding-left: 0;
+        border: 1px solid #ccc;
+        max-height: 300px; /* Limit the height to prevent excessive scrolling */
+        overflow-y: auto; /* Add scrollbars if content overflows */
+    }
+
+        .process-list li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+        }
+</style>
+
+
+
+
+
+
+<style>
+    .process-list {
+        list-style-type: none;
+        padding-left: 0;
+        border: 1px solid #ccc;
+        max-height: 300px; /* Limit the height to prevent excessive scrolling */
+        overflow-y: auto; /* Add scroll*/
+</style>
+
+
+

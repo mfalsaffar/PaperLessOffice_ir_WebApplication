@@ -1,0 +1,90 @@
+﻿@using PaperLessOffice_ir_WebApplication.Models
+@model PaperLessOffice_ir_WebApplication.Models.ActiveUsersRequest
+
+
+@{
+    ViewBag.Title = "Active Users";
+}
+
+<h2>Active Users</h2>
+@using (Html.BeginForm("ActiveUsers", "UserProcess", FormMethod.Post))
+{
+<div>
+    @Html.Label("Select a user:")
+    @Html.DropDownListFor(m => m.UserId, (IEnumerable<SelectListItem>)ViewBag.UsersDropdown, "Select a user", new { @class = "form-control" })
+    
+    @*<button type="submit" name="command" value="GetProcessUser">Display Processes</button>*@
+
+    <button type="submit" name="command" value="GetProcessUserAllowed">Display Processes Allowed</button>
+    <button type="submit" name="command" value="GetProcessUserNotAllowed">Display Processes Not Allowed</button>
+</div>
+}
+
+
+<!-- Rest of your code -->
+
+
+
+@if (ViewBag.ProcessAllowed != null)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Processes Allowed</h3>
+            <ul class="process-list">
+                @foreach (var process in ViewBag.ProcessAllowed)
+                {
+                    @*<li>@process.ProcName</li>*@
+                    @*<li>
+                            <input type="checkbox" id="AllowedProcess_@process.ProcId" name="selectedAllowedProcesses" value="@process.ProcId" />
+                            <label for="AllowedProcess_@process.ProcId">@process.ProcName</label>
+                        </li>*@
+                    <li>
+                        <input type="checkbox" id="AllowedProcess_@process.ProcId" name="selectedAllowedProcesses" value="@process.ProcId" checked="checked" />
+                        <label for="AllowedProcess_@process.ProcId">@process.ProcName</label>
+                    </li>
+                }
+                @if (ViewBag.ProcessAllowed.Count == 0)
+                {
+                    <li>No processes allowed</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+@if (ViewBag.ProcessNotAllowed != null)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Processes Not Allowed</h3>
+            <ul class="process-list">
+                @foreach (var process in ViewBag.ProcessNotAllowed)
+                {
+                    @*<li>@process.ProcName</li>*@
+                    <li>
+                        <input type="checkbox" id="notAllowedProcess_@process.ProcId" name="selectedNotAllowedProcesses" value="@process.ProcId" />
+                        <label for="notAllowedProcess_@process.ProcId">@process.ProcName</label>
+                    </li>
+                }
+                @if (ViewBag.ProcessNotAllowed.Count == 0)
+                {
+                    <li>No processes not allowed</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<style>
+    .process-list {
+        list-style-type: none;
+        padding-left: 0;
+        border: 1px solid #ccc;
+        max-height: 300px; /* Limit the height to prevent excessive scrolling */
+        overflow-y: auto; /* Add scrollbars if content overflows */
+    }
+
+        .process-list li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+        }
+</style>

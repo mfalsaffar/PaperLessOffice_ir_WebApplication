@@ -1,0 +1,34 @@
+﻿@model List<PaperLessOffice_ir_WebApplication.Models.ProGetMyJobResponse>
+
+@{
+    ViewBag.Title = "My Jobs";
+}
+
+<h2>My Jobs</h2>
+
+<table class="table">
+    <tr>
+        <th>Fullname</th>
+        <th>ProcName</th>
+        <th>WfId</th>
+        <!-- Add other headers as needed -->
+    </tr>
+    @foreach (var job in Model)
+    {
+<tr>
+    <td>@job.Fullname</td>
+    <td>@job.ProcName</td>
+    <td>@job.WfId</td>
+    <td>@job.ProcId</td>
+    <td>@job.WfStatus</td>
+    <td>@job.TimeJobStart</td>
+    <td>@job.AlarmTime</td>
+    <td>@job.Doc</td>
+    <td>@job.WfCurrentJob</td>
+    <td>@job.WfStatusCode</td>
+    <td>@job.JobName</td>
+    <!-- Add other columns as needed -->
+</tr>
+    }
+</table>
+
