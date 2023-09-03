@@ -92,7 +92,7 @@ namespace PaperLessOffice_ir_WebApplication.Controllers
         // Other action methods and code...
 
         [HttpGet]
-        public JsonResult GetDetailedJobInfo(long userId, long jobId)
+        public JsonResult GetDetailedJobInfo(long jobId)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace PaperLessOffice_ir_WebApplication.Controllers
                     using (SqlCommand command = new SqlCommand("Pro_GetMySpecificJob", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@userId", userId);
+                        //command.Parameters.AddWithValue("@userId", userId);
                         command.Parameters.AddWithValue("@jobId", jobId);
 
                         using (SqlDataReader reader = command.ExecuteReader())
