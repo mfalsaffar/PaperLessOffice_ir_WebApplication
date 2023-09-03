@@ -25,6 +25,12 @@ namespace PaperLessOffice_ir_WebApplication
             defaults: new { controller = "UPnew", action = "ActiveUsers", id = UrlParameter.Optional }
            );
 
+            routes.MapRoute(
+            name: "DisplayUsersForJob",
+            url: "UJnew/DisplayUsersForJob",
+            defaults: new { controller = "UJnew", action = "DisplayUsersForJob" }
+);
+
         }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model PaperLessOffice_ir_WebApplication.ViewModels.JobViewModel
+
+@{
+    ViewBag.Title = "Display Users for Job";
+}
+
+<h2>Display Users for Job</h2>
+@using (Html.BeginForm("DisplayUsersForJob", "UJnew", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Select a job:")
+        @Html.DropDownListFor(m => m.SelectedJobId, Model.JobsDropdown, "Select a job", new { @class = "form-control" })
+    </div>
+    <div class="mt-2">
+        <ul></ul>
+        <button type="submit" name="command" value="GetUsersForJob" class="btn btn-primary">Display Users for this Job</button>
+    </div>
+}
+
+@if (Model != null && Model.SelectedJob != null)
+{
+    <h3>Users Allowed for @Model.SelectedJob.JobName</h3>
+    <ul class="user-list">
+        @foreach (var user in Model.SelectedJob.Users)
+        {
+            <li>@user.UserName</li>
+        }
+    </ul>
+}
+
+<style>
+    .user-list {
+        list-style-type: none;
+        padding-left: 0;
+        border: 1px solid #ccc;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+        .user-list li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+        }
+</style>

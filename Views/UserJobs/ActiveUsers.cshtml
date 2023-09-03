@@ -1,0 +1,58 @@
+﻿@model PaperLessOffice_ir_WebApplication.ViewModels.UserJobs
+
+@{
+    ViewBag.Title = "Active Users";
+}
+
+<h2>Active Users</h2>
+@using (Html.BeginForm("ActiveUsers", "UserJobs", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Select a user:")
+        @Html.DropDownListFor(m => m.UserId, (IEnumerable<SelectListItem>)ViewBag.UsersDropdown, "Select a user", new { @class = "form-control" })
+
+        <button type="submit" name="command" value="GetJobUser">Display Jobs</button>
+    </div>
+}
+
+@if (Model != null && Model.Jobs != null)
+{
+    <div class="row">
+        <div>
+            <div id="transfer2" class="transfer-demo"></div>
+        </div>
+    </div>
+    @section scripts {
+
+        <script type="text/javascript">
+        console.log(@Html.Raw(Json.Encode(Model.Jobs)));
+        var dataArray2 = @Html.Raw(Json.Encode(Model.Jobs).ToLower());
+
+        var settings2 = {
+            "dataArray": dataArray2,
+            "itemName": "title",
+            "valueName": "id",
+            "callable": function (items) {
+                console.dir(items)
+            }
+        };
+
+        $("#transfer2").transfer(settings2);</script>
+    }
+
+}
+
+<style>
+    .job-list {
+        list-style-type: none;
+        padding-left: 0;
+        border: 1px solid #ccc;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+        .job-list li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+        }
+</style>

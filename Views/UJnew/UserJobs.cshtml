@@ -1,0 +1,86 @@
+﻿@model PaperLessOffice_ir_WebApplication.ViewModels.JobViewModel
+
+@{
+    ViewBag.Title = "User Jobs";
+}
+
+<h2>User Jobs</h2>
+@using (Html.BeginForm("UserJobs", "UJnew", FormMethod.Post))
+{
+    <div>
+        @Html.Label("Select a user:")
+        @Html.DropDownListFor(m => m.UserId, (IEnumerable<SelectListItem>)ViewBag.UsersDropdown, "Select a user", new { @class = "form-control" })
+
+        <button type="submit" name="command" value="GetUserJobs">Display User Jobs</button>
+    </div>
+}
+
+@if (Model != null && Model.Jobs != null)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Jobs List</h3>
+            <ul class="job-list">
+                @foreach (var job in Model.Jobs)
+                {
+                    <li>
+                        <input type="checkbox" id="job_@job.JobId" name="selectedJobs" value="@job.JobId" />
+                        <label for="job_@job.JobId">@job.JobName</label>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3>Users Allowed</h3>
+            <ul class="user-list">
+                @foreach (var user in Model.Jobs.FirstOrDefault()?.Users)
+                {
+                    <li>@user.UserName</li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $('.job-list input[type="checkbox"]').change(function () {
+            if (this.checked) {
+                var jobId = $(this).val();
+                // Send an AJAX request to get users allowed for the selected job
+                $.ajax({
+                    url: '/UJnew/GetUsersAllowedForJob',
+                    type: 'GET',
+                    data: { jobId: jobId },
+                    dataType: 'json',
+                    success: function (data) {
+                        // Update the User Allowed list with the retrieved data
+                        var userAllowedList = $('.user-list');
+                        userAllowedList.empty();
+                        $.each(data, function (index, user) {
+                            userAllowedList.append('<li>' + user.UserName + '</li>');
+                        });
+                    },
+                    error: function () {
+                        alert('Error retrieving users allowed for the selected job.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    .job-list, .user-list {
+        list-style-type: none;
+        padding-left: 0;
+        border: 1px solid #ccc;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+        .job-list li, .user-list li {
+            padding: 5px 10px;
+            border-bottom: 1px solid #ccc;
+        }
+</style>

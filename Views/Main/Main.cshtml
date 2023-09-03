@@ -1,0 +1,262 @@
+﻿@*@model List<JobShortInfo>*@
+@model List<PaperLessOffice_ir_WebApplication.ViewModels.JobShortInfo>
+@using PaperLessOffice_ir_WebApplication.ViewModels;
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- First Segment -->
+         
+            <h3>Filtered Jobs</h3>
+            <select id="jobTypeDropdown">
+                <!-- Populate job types from the first list -->
+                <option value="jobType1">Job Type 1</option>
+                <option value="jobType2">Job Type 2</option>
+                <!-- Add more job types here -->
+            </select>
+
+            <h2>My Jobs Short List</h2>
+            <ul>
+                @foreach (var job in ViewBag.JobShortInfo)
+                {
+                    <li><a href="#" class="job-link" data-jobid="@job.JobId">@job.JobName : @job.Total</a></li>
+                }
+            </ul>
+            <!--  </div> -->
+        </div>
+        <div class="col-md-3">
+            <!-- Second Segment -->
+          
+            <h2>Jobs Inbox</h2>
+            <ul id="JobInbox">
+
+                <!-- Display detailed jobs based on the selected job from the first segment -->
+                @foreach (var job in ViewBag.DetailedJobInfo)
+                {
+                    <li class="clickable-job">
+                        <div class="job-header">
+                            <div class="job-id">
+                                <h3>WFId</h3>
+                                <p>@job.WFId</p>
+                            </div>
+                            <div class="alarm-time">
+                                <h6>AlarmTime</h6>
+                                <p>@job.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                            </div>
+                        </div>
+                        <div class="job-details">
+                            <h4>FullName</h4>
+                            <p>@job.FullName</p>
+                            <h5>ProcName</h5>
+                            <p>@job.ProcName</p>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <!--  </div>-->
+        </div>
+        <div class="col-md-3">
+            <!-- Third Segment -->
+       
+            <div class="history-section">
+                <h2>History</h2>
+                <ul>
+                    <!-- Display history items -->
+                    <li>History Item 1</li>
+                    <li>History Item 2</li>
+                    <!-- Add more history items here -->
+                </ul>
+            </div>
+
+            <div class="options-section">
+                <h2>Options/Actions</h2>
+                <ul>
+                    <!-- Display options or actions -->
+                    <li>Action 1</li>
+                    <li>Action 2</li>
+                    <!-- Add more actions here -->
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <!-- Fourth Segment -->
+            <div class="segment pdf-segment" style="flex: 42%">
+                <h2>PDF File</h2>
+                <!-- Embed a PDF viewer here to display the PDF content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include your scripts and styles here to handle interactions and formatting -->
+<!-- Include your scripts and styles here to handle interactions and formatting -->
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        // Attach a click event listener to the job links in the first segment
+        $('.job-link').on('click', function (event) {
+            event.preventDefault();
+            var jobId = $(this).data('jobid');
+            loadFilteredJobs(jobId);
+        });
+
+        function loadFilteredJobs(jobId) {
+            var wfid = jobId; // Use jobId as WFId
+
+            // Make an AJAX request to retrieve detailed job information based on wfid
+            $.ajax({
+                type: 'GET',
+                url: '/Main/GetDetailedJobInfo?wfid=' + wfid,
+                success: function (detailedJobInfo) {
+                    var secondSegment = $('.segment:nth-child(2) ul');
+                    secondSegment.empty(); // Clear existing content
+
+                    $.each(detailedJobInfo, function (index, job) {
+                        var li = $('<li></li>');
+                        var wfIdLink = $('<a href="#" class="wf-id-link"></a>'); // Create a link
+                        var strong = $('<strong></strong>').text(job.WFId); // Create a <strong> element with the WFId
+                        wfIdLink.append(strong); // Append the <strong> element to the link
+                        li.append(wfIdLink);
+                        li.append('<h4>' + job.AlarmTime + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>');
+                        secondSegment.append(li);
+
+                        // Attach a click event listener to the WFId link to populate the third and fourth segments
+                        wfIdLink.on('click', function () {
+                            populateThirdAndFourthSegments(job.WFId);
+                        });
+                    });
+                },
+                error: function () {
+                    // Handle error here
+                }
+            });
+        }
+
+        function populateThirdAndFourthSegments(wfId) {
+            // Populate the third and fourth segments based on the selected WFId
+            // ...
+        }
+    });
+
+    //document.addEventListener('DOMContentLoaded', function () {
+    //    var jobLinks = document.querySelectorAll('.job-link');
+
+    //    jobLinks.forEach(function (link) {
+    //        link.addEventListener('click', function (event) {
+    //            event.preventDefault();
+    //            var jobId = this.getAttribute('data-jobid');
+    //            loadFilteredJobs(jobId);
+    //        });
+    //    });
+
+    //    function loadFilteredJobs(jobId) {
+    //        // Perform an AJAX request to load filtered jobs based on jobId
+    //        // Update the second segment content with the loaded jobs
+    //        // Also, populate the third and fourth segments with detailed job information
+    //        var wfid = jobId; // Use jobId as WFId
+
+    //        // Make an AJAX request to retrieve detailed job information based on wfid
+    //        $.ajax({
+    //            type: 'GET',
+    //            url: '/Main/GetDetailedJobInfo?wfid=' + wfid,
+    //            success: function (detailedJobInfo) {
+    //                var secondSegment = $('.segment:nth-child(2) ul');
+    //                secondSegment.empty(); // Clear existing content
+
+    //                $.each(detailedJobInfo, function (index, job) {
+    //                    var li = $('<li></li>');
+    //                    var wfIdLink = $('<a href="#">'); // Create a link
+    //                    var strong = $('<strong></strong>'); // Create a <strong> element
+    //                    strong.text(job.WFId); // Set the WFId as content of the <strong> element
+    //                    wfIdLink.append(strong); // Append the <strong> element to the link
+    //                    li.append(wfIdLink);
+    //                    li.append('<h4>' + job.AlarmTime + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>');
+    //                    secondSegment.append(li);
+
+    //                    // Attach a click event listener to the WFId link to populate the third and fourth segments
+    //                    wfIdLink.on('click', function () {
+    //                        populateThirdAndFourthSegments(job.WFId);
+    //                    });
+    //                });
+    //            },
+    //            error: function () {
+    //                // Handle error here
+    //            }
+    //        });
+    //    }
+
+    //    //function loadFilteredJobs(jobId) {
+    //    //    // Perform an AJAX request to load filtered jobs based on jobId
+    //    //    // Update the second segment content with the loaded jobs
+    //    //    // Also, populate the third and fourth segments with detailed job information
+    //    //    var wfid = jobId; // Use jobId as WFId
+
+    //    //    // Make an AJAX request to retrieve detailed job information based on wfid
+    //    //    // For example:
+    //    //    // $.ajax({
+    //    //    //     type: 'GET',
+    //    //    //     url: '/Main/GetDetailedJobInfo?wfid=' + wfid,
+    //    //    //     success: function (data) {
+    //    //    //         // Update the content of the third and fourth segments with the retrieved data
+    //    //    //         // ...
+    //    //    //     }
+    //    //    // });
+
+    //    //    // For demonstration purposes, let's assume you have the data here directly
+    //    //    //var detailedJobInfo = [
+    //    //    //    { WFId: '12345', AlarmTime: '2023-08-15 09:00:00', FullName: 'John Doe', ProcName: 'Process 1' },
+    //    //    //    { WFId: '67890', AlarmTime: '2023-08-16 10:00:00', FullName: 'Jane Smith', ProcName: 'Process 2' }
+    //    //    //];
+
+    //    //    // Update the content of the second segment with the retrieved data
+    //    //    var secondSegment = document.querySelector('.segment:nth-child(2) ul');
+    //    //    secondSegment.innerHTML = ''; // Clear existing content
+    //    //    detailedJobInfo.forEach(function (job) {
+    //    //        var li = document.createElement('li');
+    //    //        var wfIdLink = document.createElement('a');
+    //    //        wfIdLink.href = '#'; // Add a placeholder link
+    //    //        var strong = document.createElement('strong'); // Create a <strong> element
+    //    //        strong.textContent = job.WFId; // Set the WFId as content of the <strong> element
+    //    //        wfIdLink.appendChild(strong); // Append the <strong> element to the link
+    //    //        li.appendChild(wfIdLink);
+    //    //        li.innerHTML += '<h4>' + job.AlarmTime + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>';
+    //    //        secondSegment.appendChild(li);
+
+    //    //        // Attach a click event listener to the WFId link to populate the third and fourth segments
+    //    //        wfIdLink.addEventListener('click', function () {
+    //    //            populateThirdAndFourthSegments(job.WFId);
+    //    //        });
+    //    //    });
+    //    //}
+
+    //    function populateThirdAndFourthSegments(wfid) {
+    //        // Perform an AJAX request to retrieve additional data based on wfid
+    //        // Update the content of the third and fourth segments with the retrieved data
+    //        // ...
+    //    }
+    //});
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var jobLinks = document.querySelectorAll('.job-link');
+
+        jobLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                var jobId = this.getAttribute('data-jobid');
+                loadFilteredJobs(jobId);
+            });
+        });
+
+        function loadFilteredJobs(jobId) {
+            // Perform an AJAX request to load filtered jobs based on jobId
+            // Update the second segment content with the loaded jobs
+        }
+    });
+</script>
+}
+@*</body>
+    </html>*@
