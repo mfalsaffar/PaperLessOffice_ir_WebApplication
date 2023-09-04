@@ -1,13 +1,10 @@
-﻿@*@model List<JobShortInfo>*@
-@model List<PaperLessOffice_ir_WebApplication.ViewModels.JobShortInfo>
+﻿@model List<PaperLessOffice_ir_WebApplication.ViewModels.JobShortInfo>
 @using PaperLessOffice_ir_WebApplication.ViewModels;
-
 
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <!-- First Segment -->
-         
             <h3>Filtered Jobs</h3>
             <select id="jobTypeDropdown">
                 <!-- Populate job types from the first list -->
@@ -27,12 +24,12 @@
         </div>
         <div class="col-md-3">
             <!-- Second Segment -->
-          
+
             <h2>Jobs Inbox</h2>
             <ul id="JobInbox">
 
                 <!-- Display detailed jobs (WF lists) based on the selected job from the first segment -->
-                
+
                 @foreach (var job in ViewBag.DetailedJobInfo)
                 {
                     <li class="clickable-job">
@@ -59,7 +56,7 @@
         </div>
         <div class="col-md-3">
             <!-- Third Segment -->
-       
+
             <div class="history-section">
                 <h2>History</h2>
                 <ul>
@@ -94,80 +91,61 @@
 <!-- Include your scripts and styles here to handle interactions and formatting -->
 
 @section scripts{
-<script>
-    <h2>I am Here 2</h2>
-    $(document).ready(function () {
-        // Attach a click event listener to the job links in the first segment
-        $('.job-link').on('click', function (event) {
-            event.preventDefault();
-            var jobId = $(this).data('jobid');
-            loadFilteredJobs(jobId);
-        });
+    <script>
 
-        function loadFilteredJobs(jobId) {
-            var JOBid = jobId; // Use jobId as WFId
-
-            // Make an AJAX request to retrieve detailed job information based on wfid
-            $.ajax({
-                type: 'GET',
-                url: '/Main/GetDetailedJobInfo?jobId=' + JOBid,
-                success: function (detailedJobInfo) {
-                    var secondSegment = $('.segment:nth-child(2) ul');
-                    secondSegment.empty(); // Clear existing content
-
-                    $.each(detailedJobInfo, function (index, job) {
-                        var li = $('<li></li>');
-                        var wfIdLink = $('<a href="#" class="wf-id-link"></a>'); // Create a link
-                        var strong = $('<strong></strong>').text(job.WFId); // Create a <strong> element with the WFId
-                        wfIdLink.append(strong); // Append the <strong> element to the link
-                        li.append(wfIdLink);
-                        li.append('<h4>' + job.AlarmTime + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>');
-                        secondSegment.append(li);
-
-                        // Attach a click event listener to the WFId link to populate the third and fourth segments
-                        wfIdLink.on('click', function () {
-                            populateThirdAndFourthSegments(job.WFId);
-                        });
-                    });
-                },
-                error: function () {
-                    // Handle error here
-                    <h2>I am Here 3</h2>
-                }
-            });
-        }
-
-        function populateThirdAndFourthSegments(wfId) {
-            // Populate the third and fourth segments based on the selected WFId
-            // ...
-            <h2>I am Here 4</h2>
-        }
-    });
-
-   
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var jobLinks = document.querySelectorAll('.job-link');
-
-        jobLinks.forEach(function (link) {
-            link.addEventListener('click', function (event) {
+        $(document).ready(function () {
+            // Attach a click event listener to the job links in the first segment
+            $('.job-link').on('click', function (event) {
                 event.preventDefault();
-                var jobId = this.getAttribute('data-jobid');
+                var jobId = $(this).data('jobid');
+                <h4>Debug:job-link click ed , call loadFilteredJobs</h4>
                 loadFilteredJobs(jobId);
             });
+
+            function loadFilteredJobs(jobId) {
+                var JOBid = jobId; // Use jobId as WFId
+
+                // Make an AJAX request to retrieve detailed job information based on wfid
+                <h4>Debug:inside function: loadFilteredJobs</h4>
+                $.ajax({
+                    type: 'GET',
+                    url: '/Main/GetDetailedJobInfo?jobId=' + JOBid,
+                    success: function (detailedJobInfo) {
+                        var secondSegment = $('.segment:nth-child(2) ul');
+                        secondSegment.empty(); // Clear existing content
+
+                        $.each(detailedJobInfo, function (index, job) {
+                            var li = $('<li></li>');
+                            var wfIdLink = $('<a href="#" class="wf-id-link"></a>'); // Create a link
+                            var strong = $('<strong></strong>').text(job.WFId); // Create a <strong> element with the WFId
+                            wfIdLink.append(strong); // Append the <strong> element to the link
+                            li.append(wfIdLink);
+                            li.append('<h4>' + job.AlarmTime + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>');
+                            secondSegment.append(li);
+
+                            // Attach a click event listener to the WFId link to populate the third and fourth segments
+                            wfIdLink.on('click', function () {
+                                populateThirdAndFourthSegments(job.WFId);
+                            });
+                        });
+                    },
+                    error: function () {
+                        // Handle error here
+                        <h2>I am Here 3</h2>
+                    }
+                });
+            }
+
+            function populateThirdAndFourthSegments(wfId) {
+                // Populate the third and fourth segments based on the selected WFId
+                // ...
+                <h2>I am Here 4</h2>
+            }
         });
 
-        function loadFilteredJobs(jobId) {
-            // Perform an AJAX request to load filtered jobs based on jobId
-            // Update the second segment content with the loaded jobs
-              @foreach (var job in ViewBag.JobShortInfo)
-                {
-                    <li><a href="#" class="job-link" data-jobid="@job.JobId">@job.JobName : @job.Total</a></li>
-                }
-        }
-    });
-</script>
+
+    </script>
+
+
 }
 

@@ -57,7 +57,7 @@ namespace PaperLessOffice_ir_WebApplication.Controllers
                 using (SqlCommand command = new SqlCommand("Pro_GetMyJob", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@userid", 5); // 5 should be the session of the user passed @userid ***
+                    command.Parameters.AddWithValue("@userid", 4); // 5 should be the session of the user passed @userid ***
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
