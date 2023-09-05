@@ -1,150 +1,181 @@
 ﻿@model List<PaperLessOffice_ir_WebApplication.ViewModels.JobShortInfo>
 @using PaperLessOffice_ir_WebApplication.ViewModels;
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <!-- First Segment -->
-            <h3>Filtered Jobs</h3>
-            <select id="jobTypeDropdown">
-                <!-- Populate job types from the first list -->
-                <option value="jobType1">Job Type 1</option>
-                <option value="jobType2">Job Type 2</option>
-                <!-- Add more job types here -->
-            </select>
 
-            <h2>My Jobs Short List</h2>
-            <ul>
-                @foreach (var job in ViewBag.JobShortInfo)
-                {
-                    <li><a href="#" class="job-link" data-jobid="@job.JobId">@job.JobName : @job.Total</a></li>
-                }
-            </ul>
-            <!--  </div> -->
-        </div>
-        <div class="col-md-3">
-            <!-- Second Segment -->
-
-            <h2>Jobs Inbox</h2>
-            <ul id="JobInbox">
-
-                <!-- Display detailed jobs (WF lists) based on the selected job from the first segment -->
-
-                @foreach (var job in ViewBag.DetailedJobInfo)
-                {
-                    <li class="clickable-job">
-                        <div class="job-header">
-                            <div class="job-id">
-                                <h3>WFId</h3>
-                                <p>@job.WFId</p>
-                            </div>
-                            <div class="alarm-time">
-                                <h6>AlarmTime</h6>
-                                <p>@job.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss")</p>
-                            </div>
-                        </div>
-                        <div class="job-details">
-                            <h4>FullName</h4>
-                            <p>@job.FullName</p>
-                            <h5>ProcName</h5>
-                            <p>@job.ProcName</p>
-                        </div>
-                    </li>
-                }
-            </ul>
-            <!--  </div>-->
-        </div>
-        <div class="col-md-3">
-            <!-- Third Segment -->
-
-            <div class="history-section">
-                <h2>History</h2>
-                <ul>
-                    <!-- Display history items -->
-                    <li>History Item 1</li>
-                    <li>History Item 2</li>
-                    <!-- Add more history items here -->
-                </ul>
-            </div>
-
-            <div class="options-section">
-                <h2>Options/Actions</h2>
-                <ul>
-                    <!-- Display options or actions -->
-                    <li>Action 1</li>
-                    <li>Action 2</li>
-                    <!-- Add more actions here -->
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <!-- Fourth Segment -->
-            <div class="segment pdf-segment" style="flex: 42%">
-                <h2>PDF File</h2>
-                <!-- Embed a PDF viewer here to display the PDF content -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Include your scripts and styles here to handle interactions and formatting -->
-<!-- Include your scripts and styles here to handle interactions and formatting -->
 
 @section scripts{
-    <script>
+  
+    <script type="text/javascript">
 
+    
         $(document).ready(function () {
             // Attach a click event listener to the job links in the first segment
-            $('.job-link').on('click', function (event) {
+            $('job-link').on('click', function (event) {
+                console.log('Button clicked'); // This will log "Button clicked" to the console
                 event.preventDefault();
                 var jobId = $(this).data('jobid');
-                <h4>Debug:job-link click ed , call loadFilteredJobs</h4>
-                loadFilteredJobs(jobId);
+                GetDetailedJobInfo(jobId); // loadFilteredJobs(jobId);
             });
 
-            function loadFilteredJobs(jobId) {
-                var JOBid = jobId; // Use jobId as WFId
-
-                // Make an AJAX request to retrieve detailed job information based on wfid
-                <h4>Debug:inside function: loadFilteredJobs</h4>
-                $.ajax({
-                    type: 'GET',
-                    url: '/Main/GetDetailedJobInfo?jobId=' + JOBid,
-                    success: function (detailedJobInfo) {
-                        var secondSegment = $('.segment:nth-child(2) ul');
-                        secondSegment.empty(); // Clear existing content
-
-                        $.each(detailedJobInfo, function (index, job) {
-                            var li = $('<li></li>');
-                            var wfIdLink = $('<a href="#" class="wf-id-link"></a>'); // Create a link
-                            var strong = $('<strong></strong>').text(job.WFId); // Create a <strong> element with the WFId
-                            wfIdLink.append(strong); // Append the <strong> element to the link
-                            li.append(wfIdLink);
-                            li.append('<h4>' + job.AlarmTime + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>');
-                            secondSegment.append(li);
-
-                            // Attach a click event listener to the WFId link to populate the third and fourth segments
-                            wfIdLink.on('click', function () {
-                                populateThirdAndFourthSegments(job.WFId);
-                            });
-                        });
-                    },
-                    error: function () {
-                        // Handle error here
-                        <h2>I am Here 3</h2>
-                    }
-                });
-            }
-
-            function populateThirdAndFourthSegments(wfId) {
-                // Populate the third and fourth segments based on the selected WFId
-                // ...
-                <h2>I am Here 4</h2>
-            }
         });
 
 
+        // function loadFilteredJobs(jobId) {
+        function GetDetailedJobInfo(jobId) {
+
+ 
+            var JOBid = jobId; // Use jobId as WFId
+            console.log('Button clicked'); // This will also log "Button clicked" to the console
+            // Make an AJAX request to retrieve detailed job information based on wfid
+            console.log('Debug: inside function: loadFilteredJobs'); // Log a debug message
+            $.ajax({
+                type: 'GET',
+                url: '/Main/GetDetailedJobInfo?jobId=' + JOBid,
+                success: function (detailedJobInfo) {
+
+                    console.log("success"); // Log a debug message
+                    console.log(detailedJobInfo); // Log a debug message
+
+                    var secondSegment = $('#JobInbox');
+                    secondSegment.empty(); // Clear existing content
+
+                    $.each(detailedJobInfo, function (index, job) {
+                        var li = $('<li></li>');
+                        var wfIdLink = $('<a href="#" class="wf-id-link"></a>'); // Create a link
+                        var strong = $('<strong></strong>').text(job.WFId); // Create a <strong> element with the WFId
+                        wfIdLink.append(strong); // Append the <strong> element to the link
+                        li.append(wfIdLink);
+                        const dateString = job.AlarmTime ;
+                        var milliseconds = parseInt(dateString.match(/\d+/)[0]);
+                        var date = new Date(milliseconds);
+
+                        li.append('<h4>' + date.toString() + '</h4><h4>' + job.FullName + '</h4><h5>' + job.ProcName + '</h5>');
+                        secondSegment.append(li);
+
+                        // Attach a click event listener to the WFId link to populate the third and fourth segments
+                        wfIdLink.on('click', function () {
+                            populateThirdAndFourthSegments(job.WFId);
+                        });
+                    });
+                },
+                error: function () {
+                    // Handle error here
+                    console.log('I am Here 3'); // Log an error message
+                }
+            });
+        }
+ 
+        function submitFunction(jobId) {
+            //alert(jobId)
+
+            GetDetailedJobInfo(jobId); // loadFilteredJobs(jobId);
+        }
+
+
+
     </script>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- First Segment -->
+                <h3>Filtered Jobs</h3>
+                <select id="jobTypeDropdown">
+                    <!-- Populate job types from the first list -->
+                    <option value="jobType1">Job Type 1</option>
+                    <option value="jobType2">Job Type 2</option>
+                    <!-- Add more job types here -->
+                </select>
+
+                <h2>My Jobs Short List</h2>
+                <ul>
+
+                    @foreach (var job in ViewBag.JobShortInfo)
+                    {
+
+                        <li><button onclick="submitFunction(@job.JobId)" aria-setsize="4" aria-posinset="1">@job.JobName : @job.Total 222</button></li>
+
+
+                        @*<li>  <a class="job-link" data-jobid="@job.JobId">@job.JobName : @job.Total 222</a>
+                                <button type="button" class="btn btn-link job-link" data-jobid="@job.JobId">
+                                    @job.JobName : @job.Total
+                                </button>
+                            </li>*@
+                    }
+
+                </ul>
+                <!--  </div> -->
+            </div>
+            <div class="col-md-3">
+                <!-- Second Segment -->
+
+                <h2>Jobs Inbox</h2>
+                <ul id="JobInbox">
+
+                    <!-- Display detailed jobs (WF lists) based on the selected job from the first segment -->
+
+                    @foreach (var job in ViewBag.DetailedJobInfo)
+                    {
+                        <li class="clickable-job">
+                            <div class="job-header">
+                                <div class="job-id">
+                                    <h3>WFId</h3>
+                                    <p>@job.WFId</p>
+                                </div>
+                                <div class="alarm-time">
+                                    <h6>AlarmTime</h6>
+                                    <p>@job.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                                </div>
+                            </div>
+                            <div class="job-details">
+                                <h4>FullName</h4>
+                                <p>@job.FullName</p>
+                                <h5>ProcName</h5>
+                                <p>@job.ProcName</p>
+                            </div>
+                        </li>
+                    }
+                </ul>
+                <!--  </div>-->
+            </div>
+            <div class="col-md-3">
+                <!-- Third Segment -->
+
+                <div class="history-section">
+                    <h2>History</h2>
+                    <ul>
+                        <!-- Display history items -->
+                        <li>History Item 1</li>
+                        <li>History Item 2</li>
+                        <!-- Add more history items here -->
+                    </ul>
+                </div>
+
+                <div class="options-section">
+                    <h2>Options/Actions</h2>
+                    <ul>
+                        <!-- Display options or actions -->
+                        <li>Action 1</li>
+                        <li>Action 2</li>
+                        <!-- Add more actions here -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- Fourth Segment -->
+                <div class="segment pdf-segment" style="flex: 42%">
+                    <h2>PDF File</h2>
+                    <!-- Embed a PDF viewer here to display the PDF content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include your scripts and styles here to handle interactions and formatting -->
+    <!-- Include your scripts and styles here to handle interactions and formatting -->
+
 
 
 }
